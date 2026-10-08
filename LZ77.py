@@ -227,6 +227,6 @@ match choice:
 
     # Wrong Choice
 
-    case _:
+    case default:
 
         print("\nInvalid choice!")
