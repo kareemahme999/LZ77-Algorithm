@@ -1,66 +1,124 @@
-# LZ77 Algorithm
+# LZ77 Compression and Decompression
 
-A simple Python implementation of the LZ77 lossless data compression algorithm.
-
-This project reads a text file, compresses it using LZ77-style tokenization, writes the compressed output to another text file, and can also decompress the result back to its original form.
+This project implements the **LZ77 compression algorithm** using Python.
 
 ## Features
 
-- Reads text input from `.txt` files
-- Compresses data using a sliding window with a fixed window size
-- Stores tokens as `(offset, length, next_char)`
-- Writes compressed tokens to a output file
-- Decompresses the token stream back into the original message
-- Includes a simple interactive command-line menu
+* Compress a text file using LZ77.
+* Decompress the compressed file.
+* Uses a sliding window with `WINDOW_SIZE = 6`.
+* Supports overlapping matches.
+* Saves compressed data as tuples:
 
-## Project Files
-
-- `LZ77.py` — main implementation of the compression and decompression logic
-- `kareem.txt` — sample input text file
-- `README.md` — project documentation
+  ```text
+  (offset, length, next_character)
+  ```
 
 ## How LZ77 Works
 
-The algorithm searches backward in a limited window to find the longest repeated sequence, then encodes it with:
+LZ77 searches for repeated sequences in the previous part of the message.
 
-- offset: how far back the match occurred
-- length: how many characters matched
-- next_char: the next character after the match
+Each compressed token contains:
 
-This approach reduces redundancy by replacing repeated patterns with shorter reference tokens.
+* **Offset**: How far back the matching sequence starts.
+* **Length**: Number of matching characters.
+* **Next Character**: The character after the matched sequence.
 
-## Usage
+Example:
 
-1. Open a terminal in the repository folder.
-2. Run the script:
-
-```bash
-python LZ77.py
+```text
+(3, 4, 'B')
 ```
 
-3. Choose an option:
-   - `1` for compression
-   - `2` for decompression
+This means:
 
-4. Enter the input filename and output filename.
+* Go back 3 characters.
+* Copy 4 characters.
+* Then add `B`.
 
-Note: the script expects `.txt` files and writes the generated output in the same directory as the script.
+## Time Complexity
+
+### Compression
+
+| Case         | Complexity                                        |
+| ------------ | ------------------------------------------------- |
+| Best Case    | O(n)                                              |
+| Average Case | Depends on input, commonly between O(n) and O(n²) |
+| Worst Case   | O(n²)                                             |
+
+The worst case can happen with highly repetitive input such as:
+
+```text
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+```
+
+because the algorithm performs long character comparisons.
+
+### Decompression
+
+| Case         | Complexity |
+| ------------ | ---------- |
+| Best Case    | O(n)       |
+| Average Case | O(n)       |
+| Worst Case   | O(n)       |
+
+Each character in the decompressed message is generated once.
+
+## Project Structure
+
+```text
+LZ77/
+│
+├── main.py
+├── input.txt
+├── compressed.txt
+├── output.txt
+└── README.md
+```
+
+## How to Run
+
+Run the Python program:
+
+```bash
+python main.py
+```
+
+Then choose:
+
+```text
+1. Compression
+2. Decompression
+```
 
 ## Example
 
-If you have a file named `sample.txt` with the content:
+Input:
 
 ```text
-ABABABABA
+ABAABABAAB
 ```
 
-The program will compress it by referencing repeated patterns in the previous window and then reconstruct the same content during decompression.
+The program compresses the message into LZ77 tuples and can then reconstruct the original message during decompression.
+
+## Requirements
+
+* Python 3.x
+
+No external libraries are required.
 
 ## Notes
 
-- The window size is currently set to `6` in the script and can be adjusted by changing `WINDOW_SIZE` in `LZ77.py`.
-- The implementation is educational and intended to demonstrate the LZ77 algorithm clearly and simply.
+The implementation uses a sliding window of size `6`:
 
-## License
+```python
+WINDOW_SIZE = 6
+```
 
-This project is provided for learning and demonstration purposes.
+**Names:**
+
+Kareem Ahmed Abdelmoneim  
+Badr Rafik Mohamed  
+Mohamed Said Abd El-wahhab 
+
+The decompression algorithm supports **overlapping matches**, which allows efficient compression of highly repetitive data.
