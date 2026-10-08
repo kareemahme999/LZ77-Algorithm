@@ -10,9 +10,9 @@ This project implements the **LZ77 compression algorithm** using Python.
 * Supports overlapping matches.
 * Saves compressed data as tuples:
 
-  ```text
-  (offset, length, next_character)
-  ```
+```text
+(offset, length, next_character)
+```
 
 ## How LZ77 Works
 
@@ -115,10 +115,12 @@ The implementation uses a sliding window of size `6`:
 WINDOW_SIZE = 6
 ```
 
+The decompression algorithm supports **overlapping matches**, which allows efficient compression of highly repetitive data.
+
+---
+
 **Names:**
 
-Kareem Ahmed Abdelmoneim  
-Badr Rafik Mohamed  
-Mohamed Said Abd El-wahhab 
-
-The decompression algorithm supports **overlapping matches**, which allows efficient compression of highly repetitive data.
+Kareem Ahmed Abdelmoneim
+Badr Rafik Mohamed
+Mohamed Said Abd El-wahhab
