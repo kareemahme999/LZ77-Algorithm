@@ -121,6 +121,6 @@ The decompression algorithm supports **overlapping matches**, which allows effic
 
 **Names:**
 
-Kareem Ahmed Abdelmoneim
-Badr Rafik Mohamed
+Kareem Ahmed Abdelmoneim ||
+Badr Rafik Mohamed ||
 Mohamed Said Abd El-wahhab
