@@ -1,5 +1,5 @@
 # LZ77 Compression and Decompression
-
+ 
 This project implements the **LZ77 compression algorithm** using Python.
 
 ## Features
